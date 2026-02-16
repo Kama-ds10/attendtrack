@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AttendTrack</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <main class="app">
+    <header class="app-header">
+      <h1>AttendTrack</h1>
+      <p>Church Service Attendance Counter</p>
+    </header>
+
+    <section class="counters">
+
+      <div class="counter-card">
+        <h2>Male</h2>
+        <div class="controls">
+          <button class="btn decrease" data-type="male">−</button>
+          <span id="maleCount" class="count">0</span>
+          <button class="btn increase" data-type="male">+</button>
+        </div>
+      </div>
+
+      <div class="counter-card">
+        <h2>Female</h2>
+        <div class="controls">
+          <button class="btn decrease" data-type="female">−</button>
+          <span id="femaleCount" class="count">0</span>
+          <button class="btn increase" data-type="female">+</button>
+        </div>
+      </div>
+
+      <div class="counter-card">
+        <h2>Children</h2>
+        <div class="controls">
+          <button class="btn decrease" data-type="children">−</button>
+          <span id="childrenCount" class="count">0</span>
+          <button class="btn increase" data-type="children">+</button>
+        </div>
+      </div>
+
+    </section>
+
+    <section class="total-section">
+      <h2>Total Attendance</h2>
+      <span id="totalCount" class="total-count">0</span>
+    </section>
+
+    <section class="actions">
+      <button id="resetBtn" class="reset-btn">Reset</button>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
