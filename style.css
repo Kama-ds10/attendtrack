@@ -1,0 +1,111 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background: #0f172a;
+  color: #ffffff;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.app {
+  width: 95%;
+  max-width: 500px;
+}
+
+.app-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.app-header h1 {
+  font-size: 28px;
+  margin-bottom: 5px;
+}
+
+.app-header p {
+  font-size: 14px;
+  color: #cbd5f5;
+}
+
+.counters {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.counter-card {
+  background: #1e293b;
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.counter-card h2 {
+  margin-bottom: 10px;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+}
+
+.count {
+  font-size: 28px;
+  font-weight: bold;
+  width: 60px;
+  text-align: center;
+}
+
+.btn {
+  font-size: 22px;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background: #3b82f6;
+  color: white;
+}
+
+.btn:active {
+  transform: scale(0.95);
+}
+
+.total-section {
+  margin-top: 25px;
+  text-align: center;
+}
+
+.total-count {
+  display: block;
+  font-size: 40px;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.actions {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.reset-btn {
+  padding: 12px 25px;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  background: #ef4444;
+  color: white;
+  cursor: pointer;
+}
+
+.reset-btn:active {
+  transform: scale(0.95);
+}
