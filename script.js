@@ -6,6 +6,7 @@ const childrenCount = document.getElementById("childrenCount");
 const totalCount = document.getElementById("totalCount");
 const resetBtn = document.getElementById("resetBtn");
 const serviceSelect = document.getElementById("service");
+const saveDayBtn = document.getElementById("saveDayBtn");
 
 let male = 0;
 let female = 0;
@@ -69,4 +70,30 @@ function updateDisplay() {
   femaleCount.textContent = female;
   childrenCount.textContent = children;
   totalCount.textContent = male + female + children;
+}
+
+
+saveDayBtn.addEventListener("click", function () {
+  const today = new Date().toISOString().split("T")[0];
+
+  const attendanceData = JSON.parse(localStorage.getItem("attendanceHistory")) || {};
+
+  attendanceData[today] = {
+    service1: getServiceData("service1"),
+    service2: getServiceData("service2"),
+    service3: getServiceData("service3"),
+    service4: getServiceData("service4"),
+  };
+
+  localStorage.setItem("attendanceHistory", JSON.stringify(attendanceData));
+
+  alert("Attendance saved for " + today);
+});
+
+function getServiceData(service) {
+  return {
+    male: Number(localStorage.getItem(`${service}-male`)) || 0,
+    female: Number(localStorage.getItem(`${service}-female`)) || 0,
+    children: Number(localStorage.getItem(`${service}-children`)) || 0,
+  };
 }

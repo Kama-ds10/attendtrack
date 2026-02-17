@@ -123,3 +123,9 @@ body {
   border: none;
   margin-left: 10px;
 }
+
+/* save date/day btn */
+#saveDayBtn{
+    background: #22c55e;
+    margin-top:10px;
+}
