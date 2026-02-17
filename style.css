@@ -109,3 +109,17 @@ body {
 .reset-btn:active {
   transform: scale(0.95);
 }
+
+/* service dropdown */
+.service-select {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.service-select select {
+  padding: 8px;
+  font-size: 16px;
+  border-radius: 6px;
+  border: none;
+  margin-left: 10px;
+}

@@ -1,19 +1,28 @@
-// Load saved values or default to 0
-let male = Number(localStorage.getItem("male")) || 0;
-let female = Number(localStorage.getItem("female")) || 0;
-let children = Number(localStorage.getItem("children")) || 0;
+let currentService = "service1";
 
-// Select elements
 const maleCount = document.getElementById("maleCount");
 const femaleCount = document.getElementById("femaleCount");
 const childrenCount = document.getElementById("childrenCount");
 const totalCount = document.getElementById("totalCount");
 const resetBtn = document.getElementById("resetBtn");
+const serviceSelect = document.getElementById("service");
 
-// Update UI immediately when page loads
+let male = 0;
+let female = 0;
+let children = 0;
+
+// Load data when page starts
+loadServiceData();
 updateDisplay();
 
-// Handle + and - clicks
+// Change service
+serviceSelect.addEventListener("change", function () {
+  currentService = this.value;
+  loadServiceData();
+  updateDisplay();
+});
+
+// Handle + and -
 document.addEventListener("click", function (e) {
   const type = e.target.dataset.type;
 
@@ -34,7 +43,7 @@ document.addEventListener("click", function (e) {
   }
 });
 
-// Reset
+// Reset current service only
 resetBtn.addEventListener("click", function () {
   male = 0;
   female = 0;
@@ -43,14 +52,18 @@ resetBtn.addEventListener("click", function () {
   updateDisplay();
 });
 
-// Save to browser
 function saveData() {
-  localStorage.setItem("male", male);
-  localStorage.setItem("female", female);
-  localStorage.setItem("children", children);
+  localStorage.setItem(`${currentService}-male`, male);
+  localStorage.setItem(`${currentService}-female`, female);
+  localStorage.setItem(`${currentService}-children`, children);
 }
 
-// Update screen
+function loadServiceData() {
+  male = Number(localStorage.getItem(`${currentService}-male`)) || 0;
+  female = Number(localStorage.getItem(`${currentService}-female`)) || 0;
+  children = Number(localStorage.getItem(`${currentService}-children`)) || 0;
+}
+
 function updateDisplay() {
   maleCount.textContent = male;
   femaleCount.textContent = female;
