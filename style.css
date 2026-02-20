@@ -129,3 +129,27 @@ body {
     background: #22c55e;
     margin-top:10px;
 }
+
+/* dash */
+.reset-btn{
+  background: #6366f1;;
+  margin-top:10px;
+}
+
+.admin-dashboard {
+  margin-top: 40px;
+  background: #1e293b;
+  padding: 20px;
+  border-radius: 12px;
+}
+
+.admin-dashboard h2 {
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+#summaryOutput {
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 15px;
+}

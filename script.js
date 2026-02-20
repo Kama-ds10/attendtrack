@@ -7,6 +7,8 @@ const totalCount = document.getElementById("totalCount");
 const resetBtn = document.getElementById("resetBtn");
 const serviceSelect = document.getElementById("service");
 const saveDayBtn = document.getElementById("saveDayBtn");
+const summaryOutput = document.getElementById("summaryOutput");
+const viewHistoryBtn = document.getElementById("viewHistoryBtn");
 
 let male = 0;
 let female = 0;
@@ -97,3 +99,72 @@ function getServiceData(service) {
     children: Number(localStorage.getItem(`${service}-children`)) || 0,
   };
 }
+
+
+// dash
+// Generate today's summary
+function generateSummary() {
+  const services = ["service1", "service2", "service3", "service4"];
+  let grandTotal = 0;
+  let output = "";
+
+  services.forEach(service => {
+    const data = getServiceData(service);
+    const serviceTotal = data.male + data.female + data.children;
+    grandTotal += serviceTotal;
+
+    output += `
+      <strong>${service.toUpperCase()}</strong><br>
+      Male: ${data.male} |
+      Female: ${data.female} |
+      Children: ${data.children} |
+      Total: ${serviceTotal}
+      <br><br>
+    `;
+  });
+
+  output += `<hr><strong>GRAND TOTAL (All Services): ${grandTotal}</strong>`;
+
+  summaryOutput.innerHTML = output;
+}
+
+// Show summary automatically when page loads
+generateSummary();
+
+// Update summary whenever data changes
+function updateDisplay() {
+  maleCount.textContent = male;
+  femaleCount.textContent = female;
+  childrenCount.textContent = children;
+  totalCount.textContent = male + female + children;
+
+  generateSummary();
+}
+
+// View full history
+viewHistoryBtn.addEventListener("click", function () {
+  const history = JSON.parse(localStorage.getItem("attendanceHistory")) || {};
+  
+  let historyOutput = "<h3>Saved Records</h3><br>";
+
+  for (let date in history) {
+    historyOutput += `<strong>${date}</strong><br>`;
+
+    Object.keys(history[date]).forEach(service => {
+      const data = history[date][service];
+      const total = data.male + data.female + data.children;
+
+      historyOutput += `
+        ${service.toUpperCase()} → 
+        Male: ${data.male}, 
+        Female: ${data.female}, 
+        Children: ${data.children}, 
+        Total: ${total}<br>
+      `;
+    });
+
+    historyOutput += "<br>";
+  }
+
+  summaryOutput.innerHTML = historyOutput;
+});
