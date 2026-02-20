@@ -9,6 +9,7 @@ const serviceSelect = document.getElementById("service");
 const saveDayBtn = document.getElementById("saveDayBtn");
 const summaryOutput = document.getElementById("summaryOutput");
 const viewHistoryBtn = document.getElementById("viewHistoryBtn");
+const exportBtn = document.getElementById("exportBtn");
 
 let male = 0;
 let female = 0;
@@ -167,4 +168,36 @@ viewHistoryBtn.addEventListener("click", function () {
   }
 
   summaryOutput.innerHTML = historyOutput;
+});
+
+
+// send
+exportBtn.addEventListener("click", function () {
+  const history = JSON.parse(localStorage.getItem("attendanceHistory")) || {};
+
+  if (Object.keys(history).length === 0) {
+    alert("No saved attendance records to export.");
+    return;
+  }
+
+  let csvContent = "Date,Service,Male,Female,Children,Total\n";
+
+  for (let date in history) {
+    Object.keys(history[date]).forEach(service => {
+      const data = history[date][service];
+      const total = data.male + data.female + data.children;
+
+      csvContent += `${date},${service},${data.male},${data.female},${data.children},${total}\n`;
+    });
+  }
+
+  const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+  const url = URL.createObjectURL(blob);
+
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = "attendance_report.csv";
+  link.click();
+
+  URL.revokeObjectURL(url);
 });
