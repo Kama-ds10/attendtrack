@@ -201,3 +201,12 @@ exportBtn.addEventListener("click", function () {
 
   URL.revokeObjectURL(url);
 });
+
+// app
+
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", function () {
+    navigator.serviceWorker.register("service-worker.js")
+      .then(() => console.log("Service Worker Registered"));
+  });
+}
