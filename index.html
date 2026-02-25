@@ -36,7 +36,12 @@
         <h2>Male</h2>
         <div class="controls">
           <button class="btn decrease" data-type="male">−</button>
-          <span id="maleCount" class="count">0</span>
+          <!-- <span id="maleCount" class="count">0</span> -->
+           <div class="counter-control">
+         <!-- <button onclick="decrease('male')">−</button> -->
+        <input type="number" id="maleCount" value="0" min="0">
+       <!-- <button onclick="increase('male')">+</button> -->
+      </div>
           <button class="btn increase" data-type="male">+</button>
         </div>
       </div>
@@ -45,7 +50,12 @@
         <h2>Female</h2>
         <div class="controls">
           <button class="btn decrease" data-type="female">−</button>
-          <span id="femaleCount" class="count">0</span>
+          <!-- <span id="femaleCount" class="count">0</span> -->
+           <div class="counter-control">
+          <!-- <button onclick="decrease('female')">−</button> -->
+          <input type="number" id="femaleCount" value="0" min="0">
+           <!-- <button onclick="increase('female')">+</button> -->
+      </div>
           <button class="btn increase" data-type="female">+</button>
         </div>
       </div>
@@ -54,7 +64,12 @@
         <h2>Children</h2>
         <div class="controls">
           <button class="btn decrease" data-type="children">−</button>
-          <span id="childrenCount" class="count">0</span>
+          <!-- <span id="childrenCount" class="count">0</span> -->
+           <div class="counter-control">
+          <!-- <button onclick="decrease('children')">−</button> -->
+            <input type="number" id="childrenCount" value="0" min="0">
+           <!-- <button onclick="increase('children')">+</button> -->
+       </div>
           <button class="btn increase" data-type="children">+</button>
         </div>
       </div>

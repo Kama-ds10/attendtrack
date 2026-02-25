@@ -159,3 +159,45 @@ body {
   background:#f59e0b;
   margin-top:10px;
 }
+
+/* new add display */
+.counter-control {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.counter-control input {
+  width: 80px;
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 8px;
+  border-radius: 10px;
+  border: 2px solid #3b82f6;
+  background-color: #0f172a;
+  color: white;
+}
+
+.counter-control input:focus {
+  outline: none;
+  border-color: #60a5fa;
+  box-shadow: 0 0 8px rgba(59, 130, 246, 0.6);
+}
+
+/* .counter-control button {
+  font-size: 20px;
+  padding: 8px 14px;
+  border-radius: 10px;
+  border: none;
+  background-color: #3b82f6;
+  color: white;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.counter-control button:hover {
+  background-color: #2563eb;
+} */

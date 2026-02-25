@@ -15,18 +15,24 @@ let male = 0;
 let female = 0;
 let children = 0;
 
-// Load data when page starts
+/* ==============================
+   INITIAL LOAD
+================================ */
 loadServiceData();
 updateDisplay();
 
-// Change service
+/* ==============================
+   SERVICE SWITCH
+================================ */
 serviceSelect.addEventListener("change", function () {
   currentService = this.value;
   loadServiceData();
   updateDisplay();
 });
 
-// Handle + and -
+/* ==============================
+   BUTTON (+ / -) HANDLER
+================================ */
 document.addEventListener("click", function (e) {
   const type = e.target.dataset.type;
 
@@ -47,7 +53,30 @@ document.addEventListener("click", function (e) {
   }
 });
 
-// Reset current service only
+/* ==============================
+   MANUAL INPUT TYPING
+================================ */
+maleCount.addEventListener("input", function () {
+  male = Math.max(0, Number(this.value) || 0);
+  saveData();
+  updateDisplay();
+});
+
+femaleCount.addEventListener("input", function () {
+  female = Math.max(0, Number(this.value) || 0);
+  saveData();
+  updateDisplay();
+});
+
+childrenCount.addEventListener("input", function () {
+  children = Math.max(0, Number(this.value) || 0);
+  saveData();
+  updateDisplay();
+});
+
+/* ==============================
+   RESET CURRENT SERVICE
+================================ */
 resetBtn.addEventListener("click", function () {
   male = 0;
   female = 0;
@@ -56,6 +85,9 @@ resetBtn.addEventListener("click", function () {
   updateDisplay();
 });
 
+/* ==============================
+   STORAGE FUNCTIONS
+================================ */
 function saveData() {
   localStorage.setItem(`${currentService}-male`, male);
   localStorage.setItem(`${currentService}-female`, female);
@@ -68,18 +100,26 @@ function loadServiceData() {
   children = Number(localStorage.getItem(`${currentService}-children`)) || 0;
 }
 
+/* ==============================
+   DISPLAY UPDATE
+================================ */
 function updateDisplay() {
-  maleCount.textContent = male;
-  femaleCount.textContent = female;
-  childrenCount.textContent = children;
+  maleCount.value = male;
+  femaleCount.value = female;
+  childrenCount.value = children;
   totalCount.textContent = male + female + children;
+
+  generateSummary();
 }
 
-
+/* ==============================
+   SAVE FULL DAY
+================================ */
 saveDayBtn.addEventListener("click", function () {
   const today = new Date().toISOString().split("T")[0];
 
-  const attendanceData = JSON.parse(localStorage.getItem("attendanceHistory")) || {};
+  const attendanceData =
+    JSON.parse(localStorage.getItem("attendanceHistory")) || {};
 
   attendanceData[today] = {
     service1: getServiceData("service1"),
@@ -93,6 +133,9 @@ saveDayBtn.addEventListener("click", function () {
   alert("Attendance saved for " + today);
 });
 
+/* ==============================
+   GET SERVICE DATA
+================================ */
 function getServiceData(service) {
   return {
     male: Number(localStorage.getItem(`${service}-male`)) || 0,
@@ -101,9 +144,9 @@ function getServiceData(service) {
   };
 }
 
-
-// dash
-// Generate today's summary
+/* ==============================
+   GENERATE SUMMARY
+================================ */
 function generateSummary() {
   const services = ["service1", "service2", "service3", "service4"];
   let grandTotal = 0;
@@ -129,23 +172,13 @@ function generateSummary() {
   summaryOutput.innerHTML = output;
 }
 
-// Show summary automatically when page loads
-generateSummary();
-
-// Update summary whenever data changes
-function updateDisplay() {
-  maleCount.textContent = male;
-  femaleCount.textContent = female;
-  childrenCount.textContent = children;
-  totalCount.textContent = male + female + children;
-
-  generateSummary();
-}
-
-// View full history
+/* ==============================
+   VIEW HISTORY
+================================ */
 viewHistoryBtn.addEventListener("click", function () {
-  const history = JSON.parse(localStorage.getItem("attendanceHistory")) || {};
-  
+  const history =
+    JSON.parse(localStorage.getItem("attendanceHistory")) || {};
+
   let historyOutput = "<h3>Saved Records</h3><br>";
 
   for (let date in history) {
@@ -170,10 +203,12 @@ viewHistoryBtn.addEventListener("click", function () {
   summaryOutput.innerHTML = historyOutput;
 });
 
-
-// send
+/* ==============================
+   EXPORT CSV
+================================ */
 exportBtn.addEventListener("click", function () {
-  const history = JSON.parse(localStorage.getItem("attendanceHistory")) || {};
+  const history =
+    JSON.parse(localStorage.getItem("attendanceHistory")) || {};
 
   if (Object.keys(history).length === 0) {
     alert("No saved attendance records to export.");
@@ -191,7 +226,10 @@ exportBtn.addEventListener("click", function () {
     });
   }
 
-  const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+  const blob = new Blob([csvContent], {
+    type: "text/csv;charset=utf-8;",
+  });
+
   const url = URL.createObjectURL(blob);
 
   const link = document.createElement("a");
@@ -202,11 +240,13 @@ exportBtn.addEventListener("click", function () {
   URL.revokeObjectURL(url);
 });
 
-// app
-
+/* ==============================
+   SERVICE WORKER
+================================ */
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", function () {
-    navigator.serviceWorker.register("service-worker.js")
+    navigator.serviceWorker
+      .register("service-worker.js")
       .then(() => console.log("Service Worker Registered"));
   });
 }
